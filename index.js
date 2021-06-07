@@ -73,7 +73,8 @@ function FetchData(__urlData__) {
 			});
 
 			let word_sound = document.getElementById("word_sound");
-			let wordhtml = `
+			let wordhtml; 
+			    wordhtml = `
 			    <h1 class="is-size-4">WORD</h1>
 		        <div class="is-flex play-div">
 		        	<button class="button is-rounded " id="play" btn><i class="fa fa-volume-down" id="vol" aria-hidden="true"></i></button> <h1 class="is-size-3">${displayword}</h1> <br>
@@ -94,7 +95,8 @@ function FetchData(__urlData__) {
 
 			const synonyms = Fetchvalue[0].meanings[0].definitions[0].synonyms;
 
-			if (synonyms == null) {
+			if (synonyms == null || synonyms == undefined) {
+				// 0.meanings
 				let synonymsvalue = "";
 				let synonyms_div = document.getElementById("synonyms");
 				synonyms_div.innerHTML = synonymsvalue;
@@ -105,23 +107,6 @@ function FetchData(__urlData__) {
 				}
 				let synonyms_div = document.getElementById("synonyms");
 				synonyms_div.innerHTML = synonymsvalue;
-			}
-
-			if (synonyms == null) {
-				const synonyms2 = Fetchvalue[0].meanings[0].definitions[1].synonyms;
-
-				if (synonyms2 == null) {
-					let synonymsvalue = "";
-					let synonyms_div = document.getElementById("synonyms");
-					synonyms_div.innerHTML = synonymsvalue;
-				} else {
-					let synonymsvalue = "";
-					for (let i = 0; i < synonyms2.length; i++) {
-						synonymsvalue += `<button class="button is-link is-rounded mx-2 my-1" id="${i} " onclick="addword(this.id);">${synonyms2[i]}</button>`;
-					}
-					let synonyms_div = document.getElementById("synonyms");
-					synonyms_div.innerHTML = synonymsvalue;
-				}
 			}
 
 			let play_audio = document.getElementById("play");
