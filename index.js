@@ -73,8 +73,7 @@ function FetchData(__urlData__) {
 			});
 
 			let word_sound = document.getElementById("word_sound");
-			let wordhtml; 
-			    wordhtml = `
+			let wordhtml = `
 			    <h1 class="is-size-4">WORD</h1>
 		        <div class="is-flex play-div">
 		        	<button class="button is-rounded " id="play" btn><i class="fa fa-volume-down" id="vol" aria-hidden="true"></i></button> <h1 class="is-size-3">${displayword}</h1> <br>
@@ -82,7 +81,11 @@ function FetchData(__urlData__) {
                 <h1 class="is-size-4">${audioTXT}</h1>
                 <audio id="audio" src="${audio}" type="audio/mpeg">
 			`;
-			word_sound.innerHTML = wordhtml;
+			if(wordhtml != null) {
+				word_sound.innerHTML = wordhtml;
+			} else {
+				word_sound.innerHTML = "error";
+			}
 			arrdef.forEach(function (element, index) {
 				let discription = document.getElementById("discription");
 				let discriptionhtml = arrdef[0];
@@ -142,11 +145,18 @@ function FetchData(__urlData__) {
 				    ${Fetchvalue.resolution}
 			    </p>
 			`;
-
+		    setTimeout(() => {
+				displayval.style.display = "none";
+				window.location.reload();
+			}, 3000);
+			
 		}
+
+		
 	};
 	xhr.send();
 }
+
 
 function addword(index) {
 	console.log(input.value);
